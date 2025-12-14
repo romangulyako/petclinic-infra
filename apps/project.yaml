@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: petclinic-project
+  namespace: argocd
+spec:
+  description: Project for PetClinic app and DB
+  sourceRepos:
+    - https://github.com/romangulyako/petclinic-infra.git
+  destinations:
+    - namespace: petclinic
+      server: https://kubernetes.default.svc
+    - namespace: petclinic-infra
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  orphanedResources:
+    warn: true
