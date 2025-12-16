@@ -1,12 +1,18 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: petclinic
   namespace: petclinic
   labels:
     app: petclinic
 spec:
-  replicas: 1
+  replicas: 2
+  revisionHistoryLimit: 3
+  strategy:
+    blueGreen:
+      activeService: petclinic-active
+      previewService: petclinic-preview
+      autoPromotionEnabled: false
   selector:
     matchLabels:
       app: petclinic
