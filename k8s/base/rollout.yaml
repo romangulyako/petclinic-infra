@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: petclinic
-          image: ghcr.io/romangulyako/spring-petclinic/petclinic:ebacc960bbd9498818aac3224f9513c6eb2f22ab
+          image: ghcr.io/romangulyako/spring-petclinic/petclinic:84a191669ce8954bbbf5acb80a412781c996d7e8
           ports:
             - containerPort: 8080
           readinessProbe:
