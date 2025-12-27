@@ -12,6 +12,14 @@ spec:
       server: https://kubernetes.default.svc
     - namespace: petclinic-infra
       server: https://kubernetes.default.svc
+    - namespace: petclinic-dev
+      server: https://kubernetes.default.svc
+    - namespace: petclinic-infra-dev
+      server: https://kubernetes.default.svc
+    - namespace: petclinic-prod
+      server: https://kubernetes.default.svc
+    - namespace: petclinic-infra-prod
+      server: https://kubernetes.default.svc
   clusterResourceWhitelist:
     - group: '*'
       kind: '*'
