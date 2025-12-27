@@ -1,0 +1,49 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: {{ .Values.rollout.name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.rollout.name }}
+spec:
+  replicas: {{ .Values.rollout.replicas }}
+  revisionHistoryLimit: {{ .Values.rollout.revisionHistoryLimit }}
+  strategy:
+    blueGreen:
+      activeService: {{ .Values.rollout.activeService }}
+      previewService: {{ .Values.rollout.previewService }}
+      autoPromotionEnabled: false
+  selector:
+    matchLabels:
+      app: {{ .Values.rollout.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.rollout.name }}
+    spec:
+      containers:
+        - name: {{ .Values.rollout.name }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          ports:
+            - containerPort: {{ .Values.rollout.containerPort }}
+          readinessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.rollout.containerPort }}
+            initialDelaySeconds: {{ .Values.rollout.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.rollout.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.rollout.readinessProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.rollout.readinessProbe.failureThreshold }}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.rollout.containerPort }}
+            initialDelaySeconds: {{ .Values.rollout.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.rollout.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.rollout.livenessProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.rollout.livenessProbe.failureThreshold }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.configMap.name }}
+            - secretRef:
+                name: {{ .Values.secret.name }}

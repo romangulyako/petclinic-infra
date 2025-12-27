@@ -1,0 +1,40 @@
+rollout:
+  name: petclinic
+  replicas: 2
+  containerPort: 8080
+  activeService: petclinic-active
+  previewService: petclinic-preview
+  readinessProbe:
+    initialDelaySeconds: 20
+    periodSeconds: 10
+    timeoutSeconds: 2
+    failureThreshold: 6
+  livenessProbe:
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 2
+    failureThreshold: 6
+service:
+  active:
+    name: petclinic-active
+    port: 80
+  preview:
+    name: petclinic-preview
+    port: 80
+ingress:
+  active:
+    name: petclinic-ingress-active
+  preview:
+    name: petclinic-ingress-preview
+image:
+  repository: ghcr.io/romangulyako/spring-petclinic/petclinic
+configMap:
+  name: petclinic-config
+  data:
+    SPRING_PROFILES_ACTIVE: "postgres"
+secret:
+  name: petclinic-db
+sealedSecret:
+  name: petclinic-db
+  template:
+    name: petclinic-db
