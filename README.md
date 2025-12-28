@@ -4,45 +4,6 @@ This repository contains the infrastructure as code (IaC) for deploying the Spri
 
 ---
 
-## Repository Structure
-
-.
-+-- apps
-¦   +-- petclinic-dev-app.yaml
-¦   +-- petclinic-prod-app.yaml
-¦   +-- postgres-dev.yaml
-¦   +-- postgres-prod.yaml
-¦   L-- project.yaml
-+-- charts
-¦   +-- petclinic
-¦   ¦   +-- Chart.yaml
-¦   ¦   +-- templates
-¦   ¦   ¦   +-- cm.yaml
-¦   ¦   ¦   +-- ingress-active.yaml
-¦   ¦   ¦   +-- ingress-preview.yaml
-¦   ¦   ¦   +-- rollout.yaml
-¦   ¦   ¦   +-- sealed-secret.yaml
-¦   ¦   ¦   +-- service-active.yaml
-¦   ¦   ¦   L-- service-preview.yaml
-¦   ¦   L-- values.yaml
-¦   L-- postgres
-¦       +-- Chart.yaml
-¦       +-- templates
-¦       ¦   +-- sealed-secret.yaml
-¦       ¦   +-- service.yaml
-¦       ¦   L-- statefulset.yaml
-¦       L-- values.yaml
-+-- environments
-¦   +-- dev
-¦   ¦   +-- petclinic-values.yaml
-¦   ¦   L-- postgres-values.yaml
-¦   L-- prod
-¦       +-- petclinic-values.yaml
-¦       L-- postgres-values.yaml
-L-- README.md
-
----
-
 ## Description
 
 This repository contains Helm charts and ArgoCD application manifests for deploying the Spring Petclinic application and PostgreSQL database in Kubernetes.
