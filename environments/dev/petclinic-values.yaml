@@ -5,7 +5,7 @@ configMap:
   data:
     SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres.petclinic-infra-dev.svc.cluster.local:5432/petclinic"
 image:
-  tag: dev-19ba8d934efaf3c03fc6f7390a09387b452200d6
+  tag: dev-9f36afa3f698eeb5da56662f81f1683a132f7c60
 ingress:
   active:
     host: dev.petclinic.k8s-5.sa
